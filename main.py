@@ -1,11 +1,8 @@
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium import webdriver
 import xlrd
-import time
-import os
 
 path="chromedriver.exe"
 site="https://www.formula1.com/en/results.html/2021/drivers.html"
