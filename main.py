@@ -3,10 +3,11 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium import webdriver
 import xlrd
+import os
 
 path="chromedriver.exe"
 site="https://www.formula1.com/en/results.html/2021/drivers.html"
-head=[]
+
 
 def buttonClick(path):
     button = WebDriverWait(driver,30).until(expected_conditions.presence_of_element_located((By.XPATH,path)))
@@ -28,6 +29,7 @@ def findChildrensXpath(ref, path):
     elements = WebDriverWait(ref,30).until(expected_conditions.presence_of_all_elements_located((By.XPATH,path)))
     return elements
 
+#configure webdriver
 driverOptions = webdriver.ChromeOptions()
 driverOptions.add_argument('headless')
 driver = webdriver.Chrome(options=driverOptions)
@@ -41,21 +43,18 @@ print("Cookies Accepted")
 table = findElement('/html/body/div[2]/main/article/div/div[2]/div[2]/div[2]/div/table')
 print("Find Table")
 
-#get all header information about columns
+#get the name of each column
 tableHeader = findChildren(table,'thead')
 lines = findChildrens(findChildren(tableHeader,'tr'),'th')
-
+head=[]
 for th in lines:
     if(th.text!=''):
         head.append(th.text)
 
-print(head)
-
-#get the data of table body
+#get data of each driver in the table
 tableBody = findChildren(table, 'tbody')
 lines = findChildrens(tableBody,'tr')
 drivers=[]
-
 for tr in lines:
     line=[]
     columns = findChildrens(tr, 'td')
@@ -84,6 +83,6 @@ for tr in lines:
             else:
                 line.append(col.text)
     drivers.append(line)
-
+print(head)
 print(drivers)
 driver.quit()

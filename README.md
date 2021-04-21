@@ -11,7 +11,7 @@ CONFIGURATION STEP:
     Import xlrd library
     Configure WebDrive to open in hidden mode
 
-FIRST STEP - Get data of a simple table:
+FIRST STEP - Get data of table:
     Save header information in an array;
         This header have empty elements, then we need to clean them;
     Line by line of the table body, to the information that we need;
