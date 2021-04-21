@@ -2,7 +2,7 @@ from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium import webdriver
-import xlrd
+import xlwt
 import os
 
 path="chromedriver.exe"
@@ -83,6 +83,18 @@ for tr in lines:
             else:
                 line.append(col.text)
     drivers.append(line)
-print(head)
-print(drivers)
+
+workbook = xlwt.Workbook()
+sheet = workbook.add_sheet('DriversScore')
+
+rangedHead = len(head)
+rangedRows = len(drivers)
+
+for c in range(rangedHead):
+    sheet.write(0,c,head[c])
+
+print('saving')
+workbook.save('f1.xls')
+print('saved')
+
 driver.quit()
