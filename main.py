@@ -90,11 +90,14 @@ sheet = workbook.add_sheet('DriversScore')
 rangedHead = len(head)
 rangedRows = len(drivers)
 
-for c in range(rangedHead):
-    sheet.write(0,c,head[c])
+for headColumns in range(rangedHead):
+    sheet.write(0,headColumns,head[headColumns])
 
-print('saving')
+for driversRow in range(rangedRows):
+    rangedColumns = len(drivers[driversRow])
+    for driversColumn in range(rangedColumns): #drivers[driversRows]:
+        sheet.write(driversRow+1,driversColumn,drivers[driversRow][driversColumn])
+
 workbook.save('f1.xls')
-print('saved')
-
+print('Excel file has been saved')
 driver.quit()
