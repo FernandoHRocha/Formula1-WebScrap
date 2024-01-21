@@ -29,15 +29,25 @@ def findChildrensXpath(ref, path):
     elements = WebDriverWait(ref,30).until(expected_conditions.presence_of_all_elements_located((By.XPATH,path)))
     return elements
 
+def changeFrame(path):
+    WebDriverWait(driver,30).until(expected_conditions.frame_to_be_available_and_switch_to_it((By.XPATH,path)))
+
+def contentFrame():
+    driver.switch_to.default_content()
+
 #configure webdriver
 driverOptions = webdriver.ChromeOptions()
-driverOptions.add_argument('headless')
+# driverOptions.add_argument('headless')
 driver = webdriver.Chrome(options=driverOptions)
 driver.get(site)
 
+changeFrame('//*[@id="sp_message_iframe_877301"]')
+
 #accept cookies
-buttonClick('/html/body/div[5]/div/div/div[2]/div[3]/div[2]/button[2]')
+buttonClick('//*[@id="notice"]/div[3]/button[2]')
 print("Cookies Accepted")
+
+contentFrame()
 
 #search for the right table
 table = findElement('/html/body/div[2]/main/article/div/div[2]/div[2]/div[2]/div/table')
